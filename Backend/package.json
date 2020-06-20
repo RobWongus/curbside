@@ -4,19 +4,30 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "client": "cd ../client && npm run start",
+    "start:dev": "concurrently \"nodemon --ignore '../client/*'\" \"npm run client\"",
+    "seed": "node scripts/itemsSeed.js",
+    "install": "cd ../client && npm install",
+    "build": "cd ../client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "concurrently": "^4.1.0"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
+    "axios": "^0.18.0",
+    "if-env": "^1.0.4",
     "dotenv": "^8.2.0",
     "ejs-layouts": "0.0.1",
     "express": "^4.17.1",
@@ -29,8 +40,5 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "validator": "^13.1.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
   }
 }
