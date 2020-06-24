@@ -1,14 +1,12 @@
-<<<<<<< HEAD
 const express = require('express');
 const router = express.Router();
-
-router.get('/', (req, res) => res.send('Welcome'))
-
-module.exports = router;
-=======
 const path = require("path");
-const router = require("express").Router();
+// const router = require("express").Router();
 const apiRoutes = require("./api");
+
+
+// HTML Routes
+router.get('/', (req, res) => res.send('Welcome'))
 
 // API Routes
 router.use("/api", apiRoutes);
